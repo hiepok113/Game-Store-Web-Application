@@ -1,0 +1,100 @@
+.checkout-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #080808;
+}
+
+.checkout-container {
+  display: flex;
+  flex-direction: column;
+  background-color: #f5f0f0;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.order-summary, .payment-method {
+  margin-bottom: 20px;
+  color: #000; 
+}
+
+.order-summary h2, .payment-method h2 {
+  margin-bottom: 10px;
+  color: #000; 
+}
+
+.order-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  color: #000; 
+}
+
+.order-item img {
+  width: 100px;
+  margin-right: 10px;
+}
+
+.order-total {
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+  color: #000; 
+}
+
+.payment-options {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  color: #000; 
+}
+
+.payment-options label {
+  display: flex;
+  align-items: center;
+  color: #000; 
+}
+
+.bank-details, .credit-card-details {
+  margin-top: 10px;
+  color: #000; 
+}
+
+.form-group {
+  margin-bottom: 10px;
+  color: #000; 
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  color: #000; 
+}
+
+.form-group input {
+  width: 100%;
+  padding: 8px;
+  box-sizing: border-box;
+  color: #000; 
+}
+
+.terms-text {
+  margin-top: 10px;
+  font-size: 12px;
+  color: #000; 
+}
+
+.btn-place-order {
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn-place-order:hover {
+  background-color: #0056b3;
+}

@@ -1,0 +1,28 @@
+@keyframes slideshow {
+    0% {
+        background-image: url("../Asset/image1.png");
+    }
+    33% {
+        background-image: url("../Asset/image2.png");
+    }
+    66% {
+        background-image: url("../Asset/image3.png");
+    }
+    100% {
+        background-image: url("../Asset/image1.png");
+    }
+}
+
+.body {
+    height: 90vh;
+    width: 100%;
+    display: flex;
+    background-size: cover;
+    
+    animation: slideshow 6s infinite;
+}
+
+
+
+
+

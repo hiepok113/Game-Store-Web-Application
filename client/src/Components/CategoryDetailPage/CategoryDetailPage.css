@@ -1,0 +1,130 @@
+body {
+  font-family: 'Montserrat', sans-serif;
+}
+
+.game-item-container{
+  padding: 0 60px;
+  width: 100%;
+  flex-wrap: wrap;
+  display: flex;
+  column-gap: 4%;
+  row-gap: 50px;
+}
+
+.game-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 20px;
+  gap: 20px;
+}
+
+.game-item {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  width: 16%;
+  text-align: center;
+  transition: transform 0.3s;
+}
+
+.game-item:hover {
+  transform: scale(1.05);
+}
+
+.game-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover; 
+}
+
+.game-info {
+  padding: 15px;
+}
+
+.game-title {
+  font-size: 1.2em;
+  margin: 10px 0;
+  color: #333;
+}
+
+.game-category,
+.game-genre,
+.game-price {
+  font-size: 1em;
+  margin: 5px 0;
+  color: #666;
+}
+
+.game-price {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.discount-price {
+  font-weight: bold;
+  color: #e74c3c;
+}
+
+.game-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.game-actions .btn {
+  padding: 10px 15px;
+  font-size: 14px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.add-to-cart {
+  background-color: #3498db;
+  color: #fff;
+}
+
+.add-to-cart:hover {
+  background-color: #2980b9;
+}
+
+.buy-now {
+  background-color: #e74c3c;
+  color: #fff;
+}
+
+.buy-now:hover {
+  background-color: #c0392b;
+}
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.pagination button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin: 0 5px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+.pagination button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.pagination span {
+  margin: 0 10px;
+  font-size: 16px;
+}

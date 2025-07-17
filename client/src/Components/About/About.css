@@ -1,0 +1,124 @@
+.about-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 30px;
+  background-color: #1e1e1e;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  color: #ffffff;
+  font-family: 'Roboto', sans-serif;
+  position: relative;
+  overflow: hidden;
+}
+
+.about-content {
+  text-align: center;
+  animation: fadeIn 1s ease-in-out;
+}
+
+.about-content h1 {
+  font-size: 3rem;
+  margin-bottom: 20px;
+  color: #ff4757;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.about-content h1:hover {
+  transform: scale(1.1);
+  color: #ffa502;
+}
+
+.about-content h2 {
+  font-size: 2rem;
+  margin-top: 30px;
+  margin-bottom: 15px;
+  color: #ffa502;
+  position: relative;
+  animation: slideIn 1s ease-in-out;
+}
+
+.about-content p {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  margin-bottom: 20px;
+  color: #dcdde1;
+}
+
+.about-content ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.about-content ul li {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  margin-bottom: 10px;
+  background-color: #2f3542;
+  padding: 10px;
+  border-radius: 5px;
+  animation: fadeIn 1.5s ease-in-out;
+}
+
+.contact-buttons {
+  margin-top: 30px;
+}
+
+.contact-buttons button {
+  background-color: #ff4757;
+  color: #ffffff;
+  border: none;
+  padding: 12px 25px;
+  margin: 5px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+  font-size: 1rem;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.contact-buttons button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.1);
+  transition: transform 0.3s;
+  z-index: -1;
+}
+
+.contact-buttons button:hover::before {
+  transform: scale(1.5);
+}
+
+.contact-buttons button:hover {
+  background-color: #e84118;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.contact-buttons a {
+  text-decoration: none;
+  color: inherit;
+}
+
+@keyframes fadeIn {
+  from {
+      opacity: 0;
+  }
+  to {
+      opacity: 1;
+  }
+}
+
+@keyframes slideIn {
+  from {
+      transform: translateX(-100%);
+  }
+  to {
+      transform: translateX(0);
+  }
+}

@@ -1,10 +1,15 @@
 import React, { useState, useEffect } from "react";
 import logo from "../Asset/logo.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCartShopping, faXmark } from "@fortawesome/free-solid-svg-icons";
+import {
+    faCartShopping,
+    faXmark,
+    faMagnifyingGlass,
+} from "@fortawesome/free-solid-svg-icons";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { selectUser, logout } from "../../redux/slice/userSlice";
+import { searchGame, searchRemove } from "../../redux/slice/searchSlice";
 import MyCart from "../MyCart/MyCart";
 
 const Navbar = () => {
@@ -14,6 +19,7 @@ const Navbar = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const [activeMenu, setActiveMenu] = useState(location.pathname);
+    const [searchQuery, setSearchQuery] = useState("");
 
     useEffect(() => {
         setActiveMenu(location.pathname);
@@ -33,12 +39,33 @@ const Navbar = () => {
         }
     };
 
+    const handleSearch = e => {
+        if (e.key === "Enter") {
+            dispatch(searchGame(searchQuery));
+            navigate("/allgame");
+            setSearchQuery("");
+        }
+    };
+
+    const handleInputChange = e => {
+        setSearchQuery(e.target.value);
+    };
+
+    const handleClickMenu = path => {
+        setActiveMenu(path);
+        if (path === "/allgame") {
+            dispatch(searchRemove());
+            if (location.pathname === "/allgame") {
+                window.location.reload();
+            }
+        }
+    };
+
     return (
         <div className="bg-[#0f0f11] text-white shadow-md w-full">
             <div className="flex items-center justify-between h-[75px] w-full px-6">
                 {/* Left section: Logo + Title + Menu */}
                 <div className="flex items-center gap-10">
-                    {/* Logo + Title */}
                     <div className="flex items-center gap-2">
                         <img
                             src={logo}
@@ -50,7 +77,6 @@ const Navbar = () => {
                         </p>
                     </div>
 
-                    {/* Menu */}
                     <ul className="flex gap-6 items-center font-medium text-sm md:text-base">
                         <li>
                             <Link
@@ -60,12 +86,11 @@ const Navbar = () => {
                                     activeMenu === "/"
                                         ? "text-white"
                                         : "text-gray-400"
-                                } hover:text-white text-xl font-bold    `}
+                                } hover:text-white text-xl font-bold`}
                             >
                                 STORE
                             </Link>
                         </li>
-
                         <li>
                             <Link
                                 to="/support"
@@ -82,8 +107,23 @@ const Navbar = () => {
                     </ul>
                 </div>
 
-                {/* Right section: Auth & Cart */}
+                {/* Right section: Search + Auth + Cart */}
                 <div className="flex items-center gap-5 text-sm md:text-base">
+                    <div className="relative w-[220px] hidden md:block">
+                        <input
+                            type="text"
+                            placeholder="Tìm kiếm game..."
+                            value={searchQuery}
+                            onChange={handleInputChange}
+                            onKeyDown={handleSearch}
+                            className="w-full pl-10 pr-4 py-2 rounded-full bg-[#1a1a1d] text-sm text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-600"
+                        />
+                        <FontAwesomeIcon
+                            icon={faMagnifyingGlass}
+                            className="absolute left-3 top-2.5 text-gray-400 text-sm"
+                        />
+                    </div>
+
                     {user && (
                         <span className="hidden sm:block text-xs text-gray-300">
                             Hello {user.email}

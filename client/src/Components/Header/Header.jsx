@@ -84,18 +84,7 @@ const Header = () => {
                                     : "text-gray-400"
                             }`}
                         >
-                            Duyệt
-                        </li>
-                    </Link>
-                    <Link to="/news" onClick={() => handleClickMenu("/news")}>
-                        <li
-                            className={`cursor-pointer ${
-                                activeMenu === "/news"
-                                    ? "text-white font-semibold"
-                                    : "text-gray-400"
-                            }`}
-                        >
-                            Tin tức
+                            Category
                         </li>
                     </Link>
                 </ul>

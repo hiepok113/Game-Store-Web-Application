@@ -2,10 +2,14 @@ import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import * as crypto from 'crypto';
 import * as qs from 'qs';
+import { OrdersService } from '../orders/orders.service';
 
 @Injectable()
 export class PaymentService {
-  constructor(private configService: ConfigService) {}
+  constructor(
+    private configService: ConfigService,
+    private ordersService: OrdersService,
+  ) {}
 
   createPaymentUrl(amount: number, ipAddr: string, orderInfo: string) {
     const tmnCode = this.configService.get<string>('VNPAY_TMNCODE') as string;
@@ -48,7 +52,7 @@ export class PaymentService {
     return { paymentUrl };
   }
 
-  vnpayReturn(vnp_Params: any) {
+  async vnpayReturn(vnp_Params: any) {
     const secretKey = this.configService.get<string>(
       'VNPAY_SECRETKEY',
     ) as string;
@@ -65,6 +69,13 @@ export class PaymentService {
 
     if (secureHash === signed) {
       const rspCode = vnp_Params['vnp_ResponseCode'];
+      const orderId = vnp_Params['vnp_OrderInfo'];
+      if (orderId) {
+        await this.ordersService.updateStatusFromPayment(
+          orderId,
+          rspCode === '00' ? 'paid' : 'failed',
+        );
+      }
       return { success: true, rspCode };
     } else {
       return { success: false, rspCode: '97', message: 'Checksum failed' };

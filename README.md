@@ -1,74 +1,71 @@
-# Game Store Website
+# GameVault Game Store
 
-This is a full-stack web application for a game store where users can browse games, add them to a cart, search by title or category, and make purchases. The application includes both the **frontend** (client) and **backend** (server).
+GameVault is a full-stack digital game store built with a Next.js frontend and a NestJS API. Users can browse games, search by title, manage a cart, place orders, and complete checkout through VNPay.
 
-## Table of Contents
-- [Technologies Used](#technologies-used)
-- [Features](#features)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Project Structure](#project-structure)
-- [Contact](#contact)
+## Tech Stack
 
-## Technologies Used
-### Frontend:
-- React.js
-- Axios for API requests
-- Redux for state management
-- CSS for styling
+Frontend:
+- Next.js 16
+- React 19
+- TypeScript
+- Axios
+- Framer Motion
+- Lucide React
 
-### Backend:
-- Node.js
-- Express.js
-- MongoDB (with Mongoose)
-- JWT for authentication
+Backend:
+- NestJS 11
+- MongoDB with Mongoose
+- JWT authentication
+- bcrypt password hashing
+- Swagger API docs
+- VNPay payment return verification
 
 ## Features
-- User authentication (Register, Login, Logout)
-- Game search functionality (by title and category)
-- Add games to cart
-- Payment system integration (simulation)
-- Detailed game view page
-- Responsive design
 
-## Installation
+- Register, login, logout
+- JWT-protected cart and order APIs
+- Admin-only management for games, categories, users, and all orders
+- Game listing, detail pages, and title search
+- Cart checkout with VNPay payment URL generation
+- Server-side VNPay checksum verification and order status update
+- SEO-friendly global metadata and semantic storefront markup
 
-### 1. Clone the repository:
-```bash
-git clone https://github.com/your-username/game-store.git
-cd game-store
-```
-### 2. Install dependencies:
-For client:
+## Setup
+
+Install client dependencies:
+
 ```bash
 cd client
 npm install
+cp .env.example .env.local
 ```
-For server:
+
+Install backend dependencies:
+
 ```bash
-cd server
+cd sever
 npm install
+cp .env.example .env
 ```
-### 3. Setup MongoDB:
-Make sure you have MongoDB installed and running (or use MongoDB Atlas).
-Create a .env file in the server folder with the following contents:
+
+Update `sever/.env` with your MongoDB and VNPay credentials.
+
+## Run
+
+Start the backend API:
+
 ```bash
-MONGO_URI=your-mongodb-uri
-JWT_SECRET=your-jwt-secret
+cd sever
+npm run start:dev
 ```
-### 4. Run the application:
-For client:
+
+The API runs on `http://localhost:3001` by default and Swagger is available at `http://localhost:3001/api`.
+
+Start the frontend:
+
 ```bash
 cd client
-npm start
-```
-For Server
-```bash
-cd server
 npm run dev
 ```
-### Usage
-Open your browser and go to http://localhost:3000 for the client.
-The backend runs on http://localhost:5000.
-You can register a new account, login, browse available games, add them to the cart, and proceed to checkout.
 
+The web app runs on `http://localhost:3000`.

@@ -18,7 +18,21 @@ export default function Home() {
 
   return (
     <div className="container" style={{ paddingBottom: "5rem" }}>
-      <section className="hero-section">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Store",
+            name: "GameVault",
+            description:
+              "Premium digital game store for browsing and buying PC games.",
+            url: "http://localhost:3000",
+            acceptedPaymentMethod: "VNPay",
+          }),
+        }}
+      />
+      <section className="hero-section" aria-labelledby="home-hero-title">
         <div className="hero-bg"></div>
         <div className="hero-overlay"></div>
         <motion.div
@@ -31,15 +45,14 @@ export default function Home() {
             className="badge"
             style={{ marginBottom: "1rem", display: "inline-block" }}
           >
-            NEW ARRIVALS 2026
+            CURATED DIGITAL GAMES
           </span>
-          <h1 className="title-xl">
-            Discover Your Next <br />
-            <span className="gradient-text">Gaming Adventure</span>
+          <h1 id="home-hero-title" className="title-xl">
+            GameVault Game Store
           </h1>
           <p className="subtitle" style={{ marginBottom: "2rem" }}>
-            Explore thousands of games across every genre. Premium titles,
-            massive discounts, and an unforgettable journey awaits.
+            Discover premium PC games, compare prices by genre, and checkout
+            securely with VNPay.
           </p>
           <div style={{ display: "flex", gap: "1rem" }}>
             <Link
@@ -62,9 +75,9 @@ export default function Home() {
         </motion.div>
       </section>
 
-      <section>
+      <section aria-labelledby="trending-games-title">
         <div className="flex-between" style={{ marginBottom: "2rem" }}>
-          <h2 className="title-lg" style={{ margin: 0 }}>
+          <h2 id="trending-games-title" className="title-lg" style={{ margin: 0 }}>
             Trending Now
           </h2>
           <Link href="/games" className="btn btn-secondary">
@@ -74,7 +87,7 @@ export default function Home() {
 
         <div className="grid-cards">
           {games.map((g, idx) => (
-            <motion.div
+            <motion.article
               className="game-card"
               key={g._id}
               initial={{ opacity: 0, y: 20 }}
@@ -115,7 +128,7 @@ export default function Home() {
                   </Link>
                 </div>
               </div>
-            </motion.div>
+            </motion.article>
           ))}
         </div>
       </section>

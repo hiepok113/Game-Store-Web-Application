@@ -18,6 +18,8 @@ export class AuthController {
 
   @Post('/register')
   async register(@Body() createUserDto: CreateUserDto) {
-    return this.usersService.create(createUserDto);
+    const user = await this.usersService.create(createUserDto);
+    const { password, ...safeUser } = user.toObject();
+    return safeUser;
   }
 }

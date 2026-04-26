@@ -23,20 +23,13 @@ function PaymentContent() {
     const processPayment = async () => {
       try {
         const query = searchParams.toString();
-        const orderId = searchParams.get("vnp_OrderInfo");
         const { data } = await api.get(`/payment/vnpay_return?${query}`);
 
         if (data.success && data.rspCode === "00") {
-          if (orderId) {
-            await api.put(`/orders/${orderId}/status`, { status: "paid" });
-          }
           await api.delete(`/carts/all/${user._id}`);
           await fetchCart();
           if (isMounted) setStatus("success");
         } else {
-          if (orderId) {
-            await api.put(`/orders/${orderId}/status`, { status: "failed" });
-          }
           if (isMounted) setStatus("error");
         }
       } catch (err) {

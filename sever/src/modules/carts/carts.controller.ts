@@ -1,12 +1,12 @@
 import {
-  Controller,
-  Get,
-  Post,
   Body,
-  Param,
+  Controller,
   Delete,
-  UseGuards,
+  Get,
+  Param,
+  Post,
   Request,
+  UseGuards,
 } from '@nestjs/common';
 import { CartsService } from './carts.service';
 import { CreateCartDto } from './dto/cart.dto';
@@ -20,33 +20,41 @@ export class CartsController {
   constructor(private readonly cartsService: CartsService) {}
 
   @Post()
-  create(@Body() createCartDto: CreateCartDto) {
-    return this.cartsService.create(createCartDto);
+  create(@Body() createCartDto: CreateCartDto, @Request() req) {
+    return this.cartsService.create({
+      ...createCartDto,
+      userId: req.user.userId,
+    });
+  }
+
+  @Get()
+  findCurrentUserCart(@Request() req) {
+    return this.cartsService.findByUser(req.user.userId);
   }
 
   @Get(':userId')
-  findByUser(@Param('userId') userId: string) {
-    return this.cartsService.findByUser(userId);
+  findByUser(@Request() req) {
+    return this.cartsService.findByUser(req.user.userId);
   }
 
   @Get('find/:userId/:gameId')
   findCartItem(
-    @Param('userId') userId: string,
     @Param('gameId') gameId: string,
+    @Request() req,
   ) {
-    return this.cartsService.findCartItem(userId, gameId);
+    return this.cartsService.findCartItem(req.user.userId, gameId);
   }
 
   @Delete('all/:userId')
-  removeAllFromCart(@Param('userId') userId: string) {
-    return this.cartsService.removeAllFromCart(userId);
+  removeAllFromCart(@Request() req) {
+    return this.cartsService.removeAllFromCart(req.user.userId);
   }
 
   @Delete(':userId/:gameId')
   removeGameFromCart(
-    @Param('userId') userId: string,
     @Param('gameId') gameId: string,
+    @Request() req,
   ) {
-    return this.cartsService.removeGameFromCart(userId, gameId);
+    return this.cartsService.removeGameFromCart(req.user.userId, gameId);
   }
 }

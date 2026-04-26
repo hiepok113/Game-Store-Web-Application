@@ -45,7 +45,7 @@ export default function GameDetail() {
 
   return (
     <div className="container" style={{ paddingBottom: "4rem" }}>
-      <motion.div
+      <motion.article
         className="glass-panel"
         style={{
           display: "flex",
@@ -84,7 +84,9 @@ export default function GameDetail() {
           >
             {game.category}
           </span>
-          <h1 className="title-xl">{game.title}</h1>
+          <h1 className="title-xl" style={{ maxWidth: "14ch" }}>
+            {game.title}
+          </h1>
           <p
             className="subtitle"
             style={{ fontSize: "1.25rem", marginBottom: "2rem" }}
@@ -142,7 +144,7 @@ export default function GameDetail() {
             )}
           </div>
         </div>
-      </motion.div>
+      </motion.article>
     </div>
   );
 }

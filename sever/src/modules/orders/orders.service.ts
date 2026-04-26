@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  ForbiddenException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Order, OrderDocument } from './schemas/order.schema';
@@ -32,6 +36,14 @@ export class OrdersService {
       .exec();
   }
 
+  async findForUser(id: string, userId: string): Promise<Order> {
+    const order = await this.findOne(id);
+    if (order.userId !== userId) {
+      throw new ForbiddenException('You cannot access this order');
+    }
+    return order;
+  }
+
   async findOne(id: string): Promise<Order> {
     const order = await this.orderModel.findById(id).populate('items').exec();
     if (!order) {
@@ -46,6 +58,19 @@ export class OrdersService {
   ): Promise<Order> {
     const updatedOrder = await this.orderModel
       .findByIdAndUpdate(id, { status: updateData.status }, { new: true })
+      .exec();
+    if (!updatedOrder) {
+      throw new NotFoundException(`Order #${id} not found`);
+    }
+    return updatedOrder;
+  }
+
+  async updateStatusFromPayment(
+    id: string,
+    status: 'paid' | 'failed',
+  ): Promise<Order> {
+    const updatedOrder = await this.orderModel
+      .findByIdAndUpdate(id, { status }, { new: true })
       .exec();
     if (!updatedOrder) {
       throw new NotFoundException(`Order #${id} not found`);

@@ -15,7 +15,7 @@ export default function Cart() {
   const loadCartData = async () => {
     if (!user) return;
     try {
-      const { data: carts } = await api.get(`/carts/${user._id}`);
+      const { data: carts } = await api.get("/carts");
 
       const gamePromises = carts.map((c: any) => api.get(`/games/${c.gameId}`));
       const gamesResponses = await Promise.all(gamePromises);
@@ -52,7 +52,6 @@ export default function Cart() {
     try {
       const orderItems = cartItems.map((item) => item._id);
       const { data: order } = await api.post("/orders", {
-        userId: user._id,
         items: orderItems,
         totalAmount: total,
       });

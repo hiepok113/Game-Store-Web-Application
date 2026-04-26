@@ -14,7 +14,7 @@ export default function UserOrders() {
   const fetchOrders = async () => {
     if (!user) return;
     try {
-      const { data } = await api.get(`/orders/user/${user._id}`);
+      const { data } = await api.get("/orders/user/me");
       setOrders(data);
     } catch (err) {
       console.error(err);

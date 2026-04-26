@@ -33,13 +33,15 @@ export default function Games() {
         className="flex-between"
         style={{ marginBottom: "3rem", flexWrap: "wrap", gap: "2rem" }}
       >
-        <h1 className="title-xl gradient-text" style={{ margin: 0 }}>
-          All Games
+        <h1 className="title-xl" style={{ margin: 0 }}>
+          PC Games Store
         </h1>
         <form
           onSubmit={handleSearch}
           className="flex-center"
           style={{ gap: "0.5rem", flex: "1", maxWidth: "400px" }}
+          role="search"
+          aria-label="Search games by title"
         >
           <input
             type="text"
@@ -60,7 +62,7 @@ export default function Games() {
 
       <div className="grid-cards">
         {games.map((g, idx) => (
-          <motion.div
+          <motion.article
             className="game-card"
             key={g._id}
             initial={{ opacity: 0, scale: 0.95 }}
@@ -101,7 +103,7 @@ export default function Games() {
                 </Link>
               </div>
             </div>
-          </motion.div>
+          </motion.article>
         ))}
       </div>
     </div>

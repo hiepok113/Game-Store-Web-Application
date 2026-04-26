@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import Link from "next/link";
 import { useAuth } from "../context/AuthContext";
 import { useCart } from "../context/CartContext";
@@ -8,7 +8,6 @@ import {
   LayoutDashboard,
   LogOut,
   LogIn,
-  Store,
   Package,
 } from "lucide-react";
 import { usePathname } from "next/navigation";
@@ -27,7 +26,7 @@ export const Navbar = () => {
   }
 
   return (
-    <nav className="navbar">
+    <nav className="navbar" aria-label="Primary navigation">
       <div className="container flex-between">
         <div className="nav-links">
           <Link href="/" className="flex-center" style={{ gap: "0.5rem" }}>
@@ -82,6 +81,7 @@ export const Navbar = () => {
                 href="/cart"
                 className="btn-icon"
                 style={{ position: "relative" }}
+                aria-label={`Cart with ${cartCount} items`}
               >
                 <ShoppingCart size={20} />
                 {cartCount > 0 && (

@@ -31,7 +31,7 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
       return;
     }
     try {
-      const res = await api.get(`/carts/${user._id}`);
+      const res = await api.get("/carts");
       setCartCount(res.data.length);
     } catch (err: any) {
       if (err.response?.status !== 401) {
@@ -47,7 +47,7 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
   const addToCart = async (gameId: string) => {
     if (!user) throw new Error("Please log in to add to cart");
     try {
-      await api.post("/carts", { userId: user._id, gameId });
+      await api.post("/carts", { gameId });
       await fetchCart();
     } catch (err: any) {
       if (err.response?.status === 409) {
